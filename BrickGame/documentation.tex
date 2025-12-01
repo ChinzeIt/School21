@@ -1,0 +1,185 @@
+\documentclass[12pt]{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    backgroundcolor=\color{gray!10},
+}
+
+\title{Documentation for "BrickGame"}
+\author{Alicashe}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+The project BrickGame started as a classic "Tetris" game (v1.0) implemented in C using the ncurses library for the terminal interface.  
+It has been upgraded to BrickGame v2.0 with the addition of a classic "Snake" game implemented in C++ using the Qt framework for a desktop application.  
+The game can be launched both as a desktop application and via a terminal interface.
+
+\section{Project Structure}
+
+\subsection{Tetris Library}
+
+\begin{itemize}
+    \item Backend source files are located in \texttt{brick\_game/tetris}.
+\end{itemize}
+
+\subsection{Snake Library}
+
+\begin{itemize}
+    \item Backend source files are in \texttt{brick\_game/snake}.
+\end{itemize}
+
+\subsection{Terminal Interface (\texttt{src/gui/cli})}
+
+\begin{itemize}
+    \item Handles rendering the game field using the ncurses library.
+    \item Processes user input and displays the current game state.
+\end{itemize}
+
+\subsection{Desktop Interface (\texttt{src/gui/desktop})}
+
+\begin{itemize}
+    \item Uses the Qt framework for rendering.
+    \item Handles visual display of the game field.
+    \item Processes desktop UI button inputs.
+\end{itemize}
+
+\section{Building the Project}
+
+The project uses the \texttt{make} build system with the following targets:
+
+\begin{itemize}
+    \item \texttt{all}: Build the project.
+    \item \texttt{install}: Install the program to the system.
+    \item \texttt{uninstall}: Remove the program from the system.
+    \item \texttt{clean}: Remove temporary files and folders.
+    \item \texttt{dvi}: Generate a DVI document.
+    \item \texttt{dist}: Create an archive with the necessary files for building and running the program.
+    \item \texttt{test}: Run unit tests.
+    \item \texttt{lcov\_report}: Output test coverage in HTML format.
+    \item \texttt{run\_game}: Launch the desktop application.
+\end{itemize}
+
+\section{Environment Requirements}
+
+\begin{itemize}
+    \item C11 and C++20 programming languages.
+    \item g++ compiler.
+    \item ncurses library for the terminal interface.
+    \item Qt framework for the desktop interface.
+\end{itemize}
+
+\section{Installation and Running Instructions}
+
+\begin{enumerate}
+    \item \textbf{Installing dependencies:}
+    \begin{itemize}
+        \item Ensure g++ is installed.
+        \item Install the ncurses library.
+        \item Install the Qt framework.
+        \item Install missing dependencies using:
+        \begin{itemize}
+            \item \texttt{sudo apt install g++}
+            \item \texttt{sudo apt install libncurses5-dev}
+            \item Qt installation may require sudo depending on your system.
+        \end{itemize}
+    \end{itemize}
+
+    \item \textbf{Installation:}
+    \begin{itemize}
+        \item Run \texttt{make install} to install the program.
+    \end{itemize}
+
+    \item \textbf{Running:}
+    \begin{itemize}
+        \item Run \texttt{./game/CLI\_BrickGame 0} or \texttt{1} to start the desired game in terminal mode.
+        \item Run \texttt{make run\_game} for the desktop application.
+    \end{itemize}
+
+    \item \textbf{Uninstallation:}
+    \begin{itemize}
+        \item Run \texttt{make uninstall} to remove the program.
+    \end{itemize}
+\end{enumerate}
+
+\section{Using Tetris}
+
+\subsection{Controls}
+\begin{itemize}
+    \item Left/Right arrow keys to move pieces horizontally.
+    \item Down arrow key to speed up piece fall.
+    \item Spacebar to rotate the piece.
+    \item \texttt{p} to pause.
+    \item \texttt{s} to resume from pause.
+    \item \texttt{q} to quit.
+\end{itemize}
+
+\subsection{Game Mechanics}
+\begin{itemize}
+    \item Rotate and move pieces.
+    \item Speed up falling pieces.
+    \item Display the next piece.
+    \item Clear completed lines.
+    \item Game over when pieces reach the top.
+\end{itemize}
+
+\subsection{Game Over}
+\begin{itemize}
+    \item Game ends when no new piece can spawn.
+    \item A "Game Over" menu is displayed.
+\end{itemize}
+
+\section{Using Snake}
+
+\subsection{Controls}
+\begin{itemize}
+    \item The snake moves automatically every two seconds.
+    \item Left and Right arrow keys control horizontal movement.
+    \item Spacebar triggers a speed boost.
+    \item \texttt{p} to pause the game.
+    \item \texttt{s} to resume the game from pause.
+    \item \texttt{q} to exit the game.
+\end{itemize}
+
+\subsection{Game Mechanics}
+\begin{itemize}
+    \item The snake moves continuously on its own.
+    \item Eating an apple increases the snake's length.
+    \item Only one apple is present on the field at any time.
+    \item Each apple grants 1 point.
+    \item Level increases every 5 points, up to a maximum of 10 levels.
+    \item With each level, the snake's speed increases by 1 unit.
+    \item Moving left or right changes the snake's direction accordingly.
+\end{itemize}
+
+\subsection{Collision and Game Over}
+\begin{itemize}
+    \item Collision with the walls or with itself ends the game.
+    \item Victory is achieved when the player reaches 200 points.
+    \item After game over, a "Game Over" menu is displayed.
+\end{itemize}
+
+\section{Testing}
+
+The project includes unit tests:
+
+\begin{itemize}
+    \item C code is tested using \texttt{check} library (\texttt{test\_c}).
+    \item C++ code is tested using \texttt{test\_cpp}.
+    \item Test coverage is at least 80\%.
+\end{itemize}
+
+\end{document}
