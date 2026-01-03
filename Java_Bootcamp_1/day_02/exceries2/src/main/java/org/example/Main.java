@@ -1,0 +1,85 @@
+package org.example;
+
+import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Scanner;
+
+public class Main {
+    private static Scanner sc = new Scanner(System.in);
+    static {sc.useLocale(Locale.ROOT);}
+    private static int size=0;
+    private static ArrayList<Animal> pets = new ArrayList<>();
+    public static void main(String[] args) {
+        inputSize();
+        for (int i=0; i<size; ++i) {
+            String temp = sc.nextLine();
+            if (temp.equalsIgnoreCase("dog")) addAnimalPets(false);
+            else if (temp.equalsIgnoreCase("cat")) addAnimalPets(true);
+            else System.err.println("Incorrect input. Unsupported pet type");
+        }
+        for (Animal pets : pets) {
+            System.out.println(pets);
+        }
+    }
+
+    public static void inputSize() {
+        while (true) {
+            if (sc.hasNextInt()) {
+                size = sc.nextInt();
+                sc.nextLine();
+                if (size<=0) System.err.println("Input size <=0");
+                else break;
+            } else {
+                System.err.println("Could not parse a number. Please, try again");
+                sc.next();
+            }
+        }
+    }
+
+    public static void addAnimalPets(boolean flag) {
+        while (true) {
+            String tempN;
+            int tempA = 0;
+            double tempW = 0;
+            if (sc.hasNextLine()) {
+                tempN = sc.nextLine();
+            } else {
+                System.err.println("Could not parse a line. Please, try again");
+                sc.next();
+                continue;
+            }
+
+            if (sc.hasNextInt()) {
+                tempA = sc.nextInt();
+                sc.nextLine();
+            } else {
+                System.err.println("Could not parse a number. Please, try again");
+                sc.next();
+                continue;
+            }
+
+            if (tempA<=0) {
+                System.err.println("Incorrect input. Age <= 0");
+                return;
+            }
+
+            if (sc.hasNextDouble()) {
+                tempW = sc.nextDouble();
+                sc.nextLine();
+            } else {
+                System.err.println("Could not parse a number. Please, try again");
+                sc.next();
+                continue;
+            }
+
+            if (tempW<=0) {
+                System.err.println("Incorrect input. Mass <= 0");
+                return;
+            }
+
+            if (flag) pets.add(new Cat(tempN, tempA, tempW));
+            else pets.add(new Dog(tempN, tempA, tempW));
+            break;
+        }
+    }
+}
